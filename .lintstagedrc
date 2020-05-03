@@ -1,0 +1,6 @@
+{
+  "**/*.+(js|jsx|css|less|scss|ts|tsx)": [
+    "npm run lint",
+    "npm run format"
+  ]
+}

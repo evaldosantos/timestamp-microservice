@@ -1,5 +1,5 @@
-import { defaultValue } from './module'
+import { defaultValue } from './module';
 
-export default function() {
+export default function () {
   return defaultValue;
 }
