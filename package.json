@@ -6,9 +6,8 @@
   "scripts": {
     "build": "babel src -d build",
     "clean": "rm -rf build",
-    "start": "npm run build && nodemon build/index.js",
+    "start": "npm run build && node build/index.js",
     "start:dev": "nodemon --exec babel-node src/index.js",
-    "serve": "npm run build && node build/index.js",
     "test": "npm run build && mocha --require @babel/register",
     "test:watch": "nodemon --exec mocha --require @babel/register --recursive",
     "format": "prettier --write",
