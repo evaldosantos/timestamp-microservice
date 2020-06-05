@@ -15,7 +15,6 @@ describe('Timestamp microservice', function () {
           const response = { unix: 1451001600000 };
           expect(res.body).to.include(response);
           expect(res).to.have.status(200);
-
           done();
         });
     });
