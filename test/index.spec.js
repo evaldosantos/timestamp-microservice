@@ -8,6 +8,17 @@ chai.use(chaiHttp);
 
 describe('Timestamp microservice', () => {
   describe('GET /api/timestamp/:date_string?', () => {
+    let clock, now;
+
+    beforeEach(() => {
+      now = Date.now();
+      clock = sinon.stub(Date, 'now').returns(now);
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
     it('should handle a valid date, and return the correct unix timestamp', done => {
       chai
         .request(app)
@@ -57,14 +68,23 @@ describe('Timestamp microservice', () => {
     });
 
     it('should handle an empty date parameter, and return the current time in unix format', done => {
-      const now = Date.now();
-      sinon.stub(Date, 'now').returns(now);
-
       chai
         .request(app)
         .get('/api/timestamp/')
         .end((err, res) => {
           const response = { unix: now };
+          expect(res.body).to.include(response);
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+
+    it('should handle an empty date parameter, and return the current time in UTC format', done => {
+      chai
+        .request(app)
+        .get('/api/timestamp/')
+        .end((err, res) => {
+          const response = { utc: new Date(now).toUTCString() };
           expect(res.body).to.include(response);
           expect(res).to.have.status(200);
           done();
