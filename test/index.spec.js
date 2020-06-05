@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 
@@ -49,6 +50,21 @@ describe('Timestamp microservice', () => {
         .get('/api/timestamp/invaliddate')
         .end((err, res) => {
           const response = { error: 'Invalid Date' };
+          expect(res.body).to.include(response);
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+
+    it('should handle an empty date parameter, and return the current time in unix format', done => {
+      const now = Date.now();
+      sinon.stub(Date, 'now').returns(now);
+
+      chai
+        .request(app)
+        .get('/api/timestamp/')
+        .end((err, res) => {
+          const response = { unix: now };
           expect(res.body).to.include(response);
           expect(res).to.have.status(200);
           done();

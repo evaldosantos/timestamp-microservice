@@ -6,7 +6,9 @@ class TimestampService {
   handle = (req, res) => {
     try {
       let date;
-      const { date_string } = req.params;
+      let { date_string } = req.params;
+
+      date_string = date_string || Date.now().toString(10);
 
       if (/\d{4}-\d{2}-\d{2}/.test(date_string)) {
         date = new Date(date_string);
