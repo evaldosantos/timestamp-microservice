@@ -13,7 +13,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "rules": {},
+  "rules": {
+    "mocha/no-mocha-arrows": 0
+
+  },
   "plugins": [
     "mocha"
   ],
