@@ -42,5 +42,17 @@ describe('Timestamp microservice', () => {
           done();
         });
     });
+
+    it('should return the expected error message for an invalid date', done => {
+      chai
+        .request(app)
+        .get('/api/timestamp/invaliddate')
+        .end((err, res) => {
+          const response = { error: 'Invalid Date' };
+          expect(res.body).to.include(response);
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
   });
 });
