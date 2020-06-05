@@ -4,8 +4,16 @@ class TimestampService {
   static getInstance = () => TimestampService.instance || new TimestampService();
 
   handle = (req, res) => {
+    let date;
     const { date_string } = req.params;
-    const date = new Date(date_string);
+
+    if (/\d{4}-\d{2}-\d{2}/.test(date_string)) {
+      date = new Date(date_string);
+    } else if (/\d{10}/.test(date_string)) {
+      const unixdate = parseInt(date_string, 10);
+      date = new Date(unixdate);
+    }
+
     res.json({ unix: date.getTime(), utc: date.toUTCString() });
   };
 }
