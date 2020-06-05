@@ -6,7 +6,7 @@ class TimestampService {
   handle = (req, res) => {
     const { date_string } = req.params;
     const date = new Date(date_string);
-    res.json({ unix: date.getTime() });
+    res.json({ unix: date.getTime(), utc: date.toUTCString() });
   };
 }
 
