@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import TimestampService from './TimestampService';
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/api/timestamp/:date_string?', TimestampService.handle);
 
-export default app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+export default app.listen(port);

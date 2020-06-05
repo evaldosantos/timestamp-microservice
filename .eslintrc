@@ -16,5 +16,6 @@
   "rules": {},
   "plugins": [
     "mocha"
-  ]
+  ],
+  "parser": "babel-eslint"
 }
